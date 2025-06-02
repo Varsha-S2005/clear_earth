@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('projects-container');
   container.textContent = 'Loading projects...';
 
-  fetch('projects.json')
+  fetch('assets/projects.json')
     .then(response => {
       if (!response.ok) throw new Error('Failed to load JSON');
       return response.json();
