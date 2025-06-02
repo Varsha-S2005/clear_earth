@@ -1,38 +1,66 @@
 fetch('assets/projects.json')
-  .then(res => res.json())
-  .then(projects => {
-    const container = document.getElementById('projects-container');
-    container.innerHTML = ''; // Clear loading text
+  .then(response => response.json())
+  .then(data => {
+    const container = document.createElement('div');
 
-    projects.forEach(project => {
+    data.forEach((project, index) => {
       const card = document.createElement('div');
       card.className = 'project-card';
 
-      card.innerHTML = `
-        <div class="card-header">
-          <h2 class="project-title">${project.name}</h2>
-          <div class="icons" style="display:flex; gap:40px; align-items:center;">
-            <a href="${project.pdf}" target="_blank" class="pdf-icon" title="View PDF" style="text-align:center; text-decoration:none; color:inherit;">
-              <div style="font-size:40px;">📄</div>
-              <div style="font-weight:bold;">PDF</div>
-            </a>
-            <a href="${project.link}" target="_blank" class="link-icon" title="Official Link" style="text-align:center; text-decoration:none; color:inherit;">
-              <div style="font-size:40px;">🔗</div>
-              <div style="font-weight:bold;">Link</div>
-            </a>
-          </div>
-        </div>
-        <div class="card-details">
-          <p>📄 ${project.summary}</p>
-          <p>💬 Users can post comments and feedback about the project.</p>
-          <p>🔔 If the user is <a href="#">interested</a>, they can follow the project to get updates like hearing dates, verdicts, etc.</p>
-        </div>
+      const header = document.createElement('div');
+      header.className = 'card-header';
+
+      const title = document.createElement('h2');
+      title.className = 'project-title';
+      title.textContent = project.name;
+      title.style.cursor = 'pointer';
+      title.onclick = () => {
+        const details = document.getElementById(`details-${index}`);
+        details.style.display = details.style.display === 'none' ? 'block' : 'none';
+      };
+
+      const icons = document.createElement('div');
+      icons.className = 'icons';
+
+      const pdfLink = document.createElement('a');
+      pdfLink.href = project.pdf;
+      pdfLink.target = '_blank';
+      pdfLink.className = 'pdf-icon';
+      pdfLink.title = 'View PDF';
+      pdfLink.innerHTML = '📄<br><small>PDF</small>';
+
+      const siteLink = document.createElement('a');
+      siteLink.href = project.link;
+      siteLink.target = '_blank';
+      siteLink.className = 'link-icon';
+      siteLink.title = 'Official Link';
+      siteLink.innerHTML = '🔗<br><small>Link</small>';
+
+      icons.appendChild(pdfLink);
+      icons.appendChild(siteLink);
+
+      header.appendChild(title);
+      header.appendChild(icons);
+
+      const details = document.createElement('div');
+      details.className = 'card-details';
+      details.id = `details-${index}`;
+      details.style.display = 'none';
+      details.innerHTML = `
+        <p>📄 ${project.summary}</p>
+        <p>💬 Users can post comments and feedback about the project.</p>
+        <p>🔔 If the user is <a href="#">interested</a>, they can follow the project to get updates like hearing dates, verdicts, etc.</p>
       `;
+
+      card.appendChild(header);
+      card.appendChild(details);
 
       container.appendChild(card);
     });
+
+    document.body.appendChild(container);
   })
-  .catch(err => {
-    console.error(err);
-    document.getElementById('projects-container').textContent = 'Failed to load projects.';
+  .catch(error => {
+    console.error('Error loading projects:', error);
+    document.body.innerHTML += '<p>Failed to load projects.</p>';
   });
