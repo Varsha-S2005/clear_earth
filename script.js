@@ -1,8 +1,8 @@
 fetch('assets/projects.json')
   .then(response => response.json())
   .then(projects => {
-    const container = document.getElementById('project-container');
-    if (!container) return;
+    const container = document.getElementById('projects-container');
+    container.innerHTML = ''; // Clear "Loading..."
 
     projects.forEach((project, index) => {
       const card = document.createElement('div');
@@ -23,18 +23,20 @@ fetch('assets/projects.json')
       const icons = document.createElement('div');
       icons.className = 'icons';
 
-      const pdfLink = document.createElement('a');
-      pdfLink.href = project.pdf;
-      pdfLink.target = '_blank';
-      pdfLink.innerHTML = '📄<br><small>PDF</small>';
+      const pdfIcon = document.createElement('a');
+      pdfIcon.href = project.pdf;
+      pdfIcon.target = '_blank';
+      pdfIcon.title = 'View PDF';
+      pdfIcon.innerHTML = '📄';
 
-      const siteLink = document.createElement('a');
-      siteLink.href = project.link;
-      siteLink.target = '_blank';
-      siteLink.innerHTML = '🔗<br><small>Link</small>';
+      const linkIcon = document.createElement('a');
+      linkIcon.href = project.link;
+      linkIcon.target = '_blank';
+      linkIcon.title = 'Official Link';
+      linkIcon.innerHTML = '🔗';
 
-      icons.appendChild(pdfLink);
-      icons.appendChild(siteLink);
+      icons.appendChild(pdfIcon);
+      icons.appendChild(linkIcon);
 
       header.appendChild(title);
       header.appendChild(icons);
@@ -51,6 +53,6 @@ fetch('assets/projects.json')
     });
   })
   .catch(error => {
-    document.getElementById('project-container').textContent = 'Failed to load projects.';
+    document.getElementById('projects-container').textContent = 'Failed to load projects.';
     console.error(error);
   });
