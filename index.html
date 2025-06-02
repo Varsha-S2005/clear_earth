@@ -3,12 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <title>ClearEarth – ESA Project Tracker</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .project-card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    .project-title {
+      margin: 0;
+      cursor: pointer;
+      color: #2a6ebb;
+    }
+    .icons a {
+      text-decoration: none;
+      color: inherit;
+      text-align: center;
+      display: inline-block;
+    }
+    .icons div {
+      font-size: 32px;
+      line-height: 1;
+    }
+    .card-details {
+      display: none;
+      margin-top: 0.5rem;
+    }
+    .card-details p {
+      margin: 0.3rem 0;
+    }
+  </style>
 </head>
 <body>
   <h1>🌍 ClearEarth – ESA & Public Hearing Tracker</h1>
-
-  <!-- Container where project cards will load -->
   <div id="projects-container">Loading projects...</div>
 
   <script src="script.js"></script>
