@@ -4,49 +4,12 @@
   <meta charset="UTF-8" />
   <title>ClearEarth – ESA Project Tracker</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .icon-svg {
-      transition: fill 0.3s;
-    }
-    a:hover .icon-svg {
-      fill: #005a9e;
-    }
-  </style>
 </head>
 <body>
   <h1>🌍 ClearEarth – ESA & Public Hearing Tracker</h1>
 
-  <!-- Project Card -->
-  <div class="project-card">
-    <div class="card-header">
-      <h2 class="project-title" onclick="toggleDetails()">EIA PROJECT NAME</h2>
-      <div class="icons">
-        <div style="display: flex; gap: 40px;">
-          <!-- PDF Icon -->
-          <a href="assets/ennore-eia-report.pdf" target="_blank" rel="noopener noreferrer" style="text-align: center; text-decoration: none; color: inherit;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" viewBox="0 0 24 24" width="40" height="40" fill="#0078d7" style="display: block; margin: 0 auto;">
-              <path d="M6 2h9l5 5v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM15 7V3.5L19.5 8H16a1 1 0 0 1-1-1zM8 14h8v2H8v-2zm0-4h8v2H8v-2z"/>
-            </svg>
-            <div style="font-weight: bold; font-size: 14px;">PDF</div>
-          </a>
-
-          <!-- Link Icon -->
-          <a href="https://official-link.example" target="_blank" rel="noopener noreferrer" style="text-align: center; text-decoration: none; color: inherit;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" viewBox="0 0 24 24" width="40" height="40" fill="#0078d7" style="display: block; margin: 0 auto;">
-              <path d="M3.9 12a5 5 0 0 1 5-5h3v2h-3a3 3 0 1 0 0 6h3v2h-3a5 5 0 0 1-5-5zm7-3h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3v-2h3a3 3 0 1 0 0-6h-3z"/>
-            </svg>
-            <div style="font-weight: bold; font-size: 14px;">Link</div>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card-details" id="details">
-      <p>📄 Summary of the EIA project is presented in English and local language.</p>
-      <p>💬 Users can post comments and feedback about the project.</p>
-      <p>🔔 If the user is <a href="#">interested</a>, they can follow the project to get updates like hearing dates, verdicts, etc.</p>
-    </div>
-  </div>
+  <!-- Container where project cards will load -->
+  <div id="projects-container">Loading projects...</div>
 
   <script src="script.js"></script>
 </body>
