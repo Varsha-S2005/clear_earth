@@ -3,47 +3,47 @@ document.addEventListener('DOMContentLoaded', () => {
   container.textContent = 'Loading projects...';
 
   fetch('projects.json')
-    .then((response) => {
-      if (!response.ok) throw new Error('Network response was not ok');
+    .then(response => {
+      if (!response.ok) throw new Error('Failed to load JSON');
       return response.json();
     })
-    .then((projects) => {
-      container.innerHTML = '';
-      projects.forEach((project) => {
+    .then(projects => {
+      container.innerHTML = ''; // Clear loading text
+
+      projects.forEach(project => {
         const card = document.createElement('div');
         card.className = 'project-card';
 
-        const header = document.createElement('div');
-        header.className = 'card-header';
-
+        // Title
         const title = document.createElement('h2');
-        title.className = 'project-title';
         title.textContent = project.name;
+        title.style.cursor = 'pointer';
+
+        // Summary (hidden by default)
+        const summary = document.createElement('p');
+        summary.textContent = project.summary;
+        summary.style.display = 'none';
+
+        // Toggle summary on title click
         title.addEventListener('click', () => {
-          details.style.display = details.style.display === 'none' ? 'block' : 'none';
+          summary.style.display = summary.style.display === 'none' ? 'block' : 'none';
         });
 
-        const icons = document.createElement('div');
-        icons.className = 'icons';
-        icons.innerHTML = `
-          <a href="${project.pdf}" title="PDF" target="_blank">📄</a>
-          <a href="${project.link}" title="Link" target="_blank">🔗</a>
+        // Links
+        const links = document.createElement('div');
+        links.innerHTML = `
+          <a href="${project.pdf}" target="_blank">📄 PDF</a> |
+          <a href="${project.link}" target="_blank">🔗 Link</a>
         `;
 
-        header.appendChild(title);
-        header.appendChild(icons);
-
-        const details = document.createElement('div');
-        details.className = 'card-details';
-        details.innerHTML = `<p>${project.summary}</p>`;
-
-        card.appendChild(header);
-        card.appendChild(details);
+        card.appendChild(title);
+        card.appendChild(summary);
+        card.appendChild(links);
         container.appendChild(card);
       });
     })
-    .catch((error) => {
-      console.error('Failed to load projects:', error);
+    .catch(error => {
+      console.error('Error loading projects:', error);
       container.textContent = 'Failed to load projects.';
     });
 });
